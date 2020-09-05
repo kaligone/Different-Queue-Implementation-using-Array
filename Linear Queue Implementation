@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>  // for accesing exit function in stdlib in C
+#include<conio.h>
+
+//function declaration.......
+void enqueue();
+void dequeue();
+void show_queue();
+
+//structure declaration......
+struct queue
+{
+     int Queue[100];  //Queue declaration.....
+     int front,rare,size,choice;
+}q;
+
+
+
+int main()
+{
+   int ans;
+   q.front=0;
+   q.rare=-1;
+   printf("\n********************______LINEAR QUEUE IMPLEMENTATION USING ARRAY______********************\n\n\n");
+   
+   //accesing the size of queue ......
+   printf("Enter the size of queue....\n");
+   scanf("%d",&q.size);
+   
+   //menu driven program........
+   do
+   {
+        printf("\nSelect the operation to perform using Queue......\n1.ENQUEUE\n2.DEQUEUE\n3.DISPLAY QUEUE\n4.EXIT\n\n");
+        scanf("%d",&q.choice);
+        
+        switch(q.choice)
+        {
+            case 1: enqueue();
+                    break;
+            case 2: dequeue();
+                    break;
+            case 3: show_queue();
+                    break;
+            case 4: exit(0); //exit function to terminate the program
+                    break;   //exit function always accept intger arguments 0 or 42
+            default : printf("WRONG CHOICE");
+        }
+        
+        //asking user for to continue or else exit from the program....
+        printf("\nYou want to continue to the Q operation....(y/n)\n");
+        ans=getch();
+   }while(ans == 'y' || ans=='Y');
+   
+   
+   return 0;
+}
+
+//enqueue function......
+void enqueue()
+{
+    if(q.rare == q.size-1)
+    {
+        printf("\nQUEUE IS FULL...\n");
+    }
+    else
+    {
+        int ele;
+        printf("\nEnter the element to ENQUEUE....\n");
+        scanf("%d",&ele);
+        q.Queue[++q.rare]=ele;  //(q.rare=-1)rare is first incremented(q.rare=0) and then adding element
+    }
+}
+
+//dequeue function....
+void dequeue()
+{
+    if(q.front==0 && q.rare==-1)
+    {
+        printf("\nQUEUE IS EMPTY....\n");
+    }
+    else
+    {
+      printf("\nThe element deleted is %d\n",q.Queue[q.front]);
+      ++q.front;  //incrementing the front by 1.....
+    }
+}
+
+//show_queue function.........
+void show_queue()
+{
+    int i;
+    printf("\nThe element of QUEUE are as follows...\n");
+    i=q.front;
+    //showing the queue from where the front is after dequeue or without dequeue operation....
+    while(i<q.size)
+    {
+        printf("%d\n",q.Queue[i]);
+        i++;
+    }
+}
